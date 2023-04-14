@@ -1,19 +1,20 @@
-import { useState } from 'react'
 import './App.css'
+import { useDispatch, useSelector } from 'react-redux'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const minus = () => {
-    setCount(count - 1)
+  const dispatch = useDispatch()
+  const cash = useSelector(state => state.cash)
+  const addCash = (cash) => {
+    dispatch({type:'ADD_CASH', payload: cash})
   }
-  const plus = () => {
-    setCount(count + 1)
+  const getCash = (cash) => {
+    dispatch({type:'GET_CASH', payload: cash})
   }
   return (
     <div className="App">
-      <h1>{count}</h1>
-      <button onClick={plus}>+</button>
-      <button onClick={minus}>-</button>
+      <h1>{cash}</h1>
+      <button onClick={() => getCash(Number(prompt()))}>-</button>
+      <button onClick={() => addCash(Number(prompt()))}>+</button>
     </div>
   )
 }
